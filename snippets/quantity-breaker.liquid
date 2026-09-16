@@ -36,8 +36,8 @@
   {% if product.variants.size > 1 %}
     {% comment %} Variant Selector — 30 / 50 / 100 ml {% endcomment %}
     <div class="flex justify-between items-center mb-3 !mt-6">
-      <h2 class="m-0 text-sm md:text-base font-semibold">Größe auswählen:</h2>
-      <div class="text-xs md:text-sm italic text-gray-500">80 % unserer Kunden kaufen 50 ml oder mehr</div>
+      <h2 class="m-0 text-sm md:text-base font-semibold">Select size:</h2>
+      <div class="text-xs md:text-sm italic text-gray-500">80% of our customers buy 50 ml or more</div>
     </div>
 
     <div class="grid grid-cols-3 gap-3" id="variant-selector">
@@ -74,7 +74,7 @@
               {% endif %}
             </div>
             {% if variant.title contains '50' %}
-              <span class="text-[10px] italic text-white rounded absolute -top-[10px] left-1/2 [transform:translateX(-50%)] bg-[#c8202f] px-2 py-0.5 leading-normal">Beliebt</span>
+              <span class="text-[10px] italic text-white rounded absolute -top-[10px] left-1/2 [transform:translateX(-50%)] bg-[#c8202f] px-2 py-0.5 leading-normal">Popular</span>
             {% endif %}
             {% if variant.title contains '100' %}
               <span class="text-[10px] italic text-white rounded absolute -top-[10px] left-1/2 [transform:translateX(-50%)] bg-[#17803d] px-2 py-0.5 leading-normal">Bestseller</span>
@@ -85,7 +85,7 @@
   {% endif %}
 
   {% comment %} Quantity breaker tiers {% endcomment %}
-  <h2 class="m-0 text-sm md:text-base font-semibold !mt-4 mb-2">Menge wählen &amp; sparen:</h2>
+  <h2 class="m-0 text-sm md:text-base font-semibold !mt-4 mb-2">Choose quantity &amp; save:</h2>
 
   <div class="flex flex-col gap-3">
     <template x-for="tier in $store.qb.tiers" :key="tier.key">
@@ -116,7 +116,7 @@
             <span
               class="block text-[11px] text-gray-500 mt-0.5 font-bold"
               x-show="tier.total > 1 || tier.note"
-              x-text="tier.total > 1 ? $store.qb.money($store.qb.perBottle(tier)) + ' / Flasche' : tier.note"></span>
+              x-text="tier.total > 1 ? $store.qb.money($store.qb.perBottle(tier)) + ' / bottle' : tier.note"></span>
           </span>
 
           <span class="shrink-0 text-right leading-tight">
@@ -128,7 +128,7 @@
             <span
               class="block text-[11px] text-gray-400"
               x-show="tier.total === 1"
-              x-text="'inkl. MwSt.'"></span>
+              x-text="'incl. VAT'"></span>
           </span>
         </div>
 
@@ -147,9 +147,9 @@
           x-cloak
           class="mx-3 border-0 border-t border-solid border-black/10 pt-2 pb-2.5 flex flex-col gap-2">
           <p class="m-0 text-[11px] font-semibold text-gray-500">
-            <span x-text="tier.total"></span> Düfte im Paket —
-            <span x-show="$store.qb.remaining > 0" x-text="'noch ' + $store.qb.remaining + ' wählen'"></span>
-            <span x-show="$store.qb.remaining === 0" class="text-[#17803d]">komplett ✓</span>
+            <span x-text="tier.total"></span> fragrances in the bundle —
+            <span x-show="$store.qb.remaining > 0" x-text="'choose ' + $store.qb.remaining + ' more'"></span>
+            <span x-show="$store.qb.remaining === 0" class="text-[#17803d]">complete ✓</span>
           </p>
 
           <template x-for="(slot, i) in $store.qb.slotList(tier)" :key="i">
@@ -177,24 +177,24 @@
                     <div
                       class="text-[11px] text-gray-500 line-clamp-1"
                       x-show="slot.product.inspiration_name"
-                      x-text="'Inspiriert von ' + slot.product.inspiration_name"></div>
+                      x-text="'Inspired by ' + slot.product.inspiration_name"></div>
                   </div>
                 </template>
                 <template x-if="!slot.product">
-                  <div class="text-[13px] font-semibold text-gray-500">Duft wählen</div>
+                  <div class="text-[13px] font-semibold text-gray-500">Choose fragrance</div>
                 </template>
               </div>
 
               <span
                 x-show="slot.preselected"
-                class="shrink-0 text-[11px] font-semibold text-[#17803d]">Vorausgewählt</span>
+                class="shrink-0 text-[11px] font-semibold text-[#17803d]">Preselected</span>
               <button
                 x-show="!slot.preselected"
                 type="button"
                 @click="$store.qb.openModal()"
                 class="shrink-0 rounded-lg text-[11px] font-semibold px-3 py-1.5 cursor-pointer border border-solid transition-colors"
                 :class="slot.product ? 'bg-white text-black border-gray-300 hover:border-black' : 'bg-black text-white border-black hover:bg-gray-800'"
-                x-text="slot.product ? 'Ändern' : 'Auswählen'"></button>
+                x-text="slot.product ? 'Change' : 'Select'"></button>
             </div>
           </template>
         </div>
@@ -231,7 +231,7 @@
         <span
           x-show="!$store.qb.isComplete && !$store.qb.addingToCart"
           x-cloak
-          x-text="'Wähle noch ' + $store.qb.remaining + ($store.qb.remaining === 1 ? ' Duft' : ' Düfte')"></span>
+          x-text="'Choose ' + $store.qb.remaining + ($store.qb.remaining === 1 ? ' more fragrance' : ' more fragrances')"></span>
 
         <span x-show="$store.qb.isComplete && !$store.qb.addingToCart">{{ 'products.product.add_to_cart' | t }}</span>
         <div class="flex items-center" x-show="$store.qb.isComplete && !$store.qb.addingToCart">
@@ -250,7 +250,7 @@
           x-cloak
           class="inline-flex items-center gap-x-2 [&_.path]:stroke-white">
           {%- render 'loading-spinner', class: 'w-7 inline-block' -%}
-          <span>Wird hinzugefügt …</span>
+          <span>Adding …</span>
         </span>
       </button>
     {%- endform -%}
@@ -274,17 +274,17 @@
       <div class="flex-shrink-0">
         <div class="p-3 pt-5 border-0 border-b border-solid border-[#e3e8e5]">
           <h2 class="text-lg font-bold text-gray-900 my-0 text-center tracking-normal">
-            <span x-show="$store.qb.remaining === 0">Auswahl abgeschlossen!</span>
+            <span x-show="$store.qb.remaining === 0">Selection complete!</span>
             <span x-show="$store.qb.remaining > 0">
-              <span>Wähle noch </span>
+              <span>Choose </span>
               <span x-text="$store.qb.remaining"></span>
-              <span x-show="$store.qb.remaining === 1">Duft</span>
-              <span x-show="$store.qb.remaining > 1">Düfte</span>
+              <span x-show="$store.qb.remaining === 1">more fragrance</span>
+              <span x-show="$store.qb.remaining > 1">more fragrances</span>
             </span>
           </h2>
           <p class="my-0 text-center text-sm text-[#6b7280]">
-            <span x-text="$store.qb.selectedTier.total"></span> Düfte im Paket ·
-            Größe <span x-text="$store.qb.selectedSizeLabel"></span>
+            <span x-text="$store.qb.selectedTier.total"></span> fragrances in the bundle ·
+            Size <span x-text="$store.qb.selectedSizeLabel"></span>
           </p>
         </div>
 
@@ -297,11 +297,11 @@
             <button
               @click="$store.qb.activeCategory = 'fuer-maenner'"
               :class="$store.qb.activeCategory === 'fuer-maenner' ? 'border-[#17803d] bg-[#17803d] text-white hover:!text-white' : 'bg-white border-gray-200'"
-              class="px-2 py-1.5 rounded-full font-semibold border-2 border-solid cursor-pointer hover:text-[#17803d] hover:border-[#17803d]">Herren</button>
+              class="px-2 py-1.5 rounded-full font-semibold border-2 border-solid cursor-pointer hover:text-[#17803d] hover:border-[#17803d]">Men</button>
             <button
               @click="$store.qb.activeCategory = 'fuer-frauen'"
               :class="$store.qb.activeCategory === 'fuer-frauen' ? 'border-[#17803d] bg-[#17803d] text-white hover:!text-white' : 'bg-white border-gray-200'"
-              class="px-2 py-1.5 rounded-full font-semibold border-2 border-solid cursor-pointer hover:text-[#17803d] hover:border-[#17803d]">Damen</button>
+              class="px-2 py-1.5 rounded-full font-semibold border-2 border-solid cursor-pointer hover:text-[#17803d] hover:border-[#17803d]">Women</button>
           </div>
         </div>
 
@@ -312,7 +312,7 @@
             </div>
             <input
               type="text"
-              placeholder="Suchen..."
+              placeholder="Search..."
               x-model="$store.qb.searchText"
               class="block w-full p-2 pl-8 rounded-xl border-2 border-solid cursor-pointer bg-white border-gray-200 focus:outline-none focus:border-[#17803d] focus:shadow-none focus:border-2">
           </div>
@@ -346,10 +346,10 @@
                   <div class="flex items-center gap-1.5">
                     <span
                       x-show="product.tags.some(tag => tag === 'fuer-maenner')"
-                      class="shrink-0 px-2 py-0.5 rounded-full bg-[#f1f4f2] text-[#6b7280] text-[10px] font-semibold leading-tight">Herren</span>
+                      class="shrink-0 px-2 py-0.5 rounded-full bg-[#f1f4f2] text-[#6b7280] text-[10px] font-semibold leading-tight">Men</span>
                     <span
                       x-show="product.tags.some(tag => tag === 'fuer-frauen')"
-                      class="shrink-0 px-2 py-0.5 rounded-full bg-[#f1f4f2] text-[#6b7280] text-[10px] font-semibold leading-tight">Damen</span>
+                      class="shrink-0 px-2 py-0.5 rounded-full bg-[#f1f4f2] text-[#6b7280] text-[10px] font-semibold leading-tight">Women</span>
                     <span
                       x-show="product.occasion"
                       x-html="product.occasion"
@@ -375,7 +375,7 @@
         <button
           @click="$store.qb.showModal = false"
           class="w-full rounded-full bg-[#146b32] hover:bg-[#17803d] text-white border-0 text-lg font-bold py-3 cursor-pointer transition-colors">
-          Fertig
+          Done
         </button>
       </div>
     </div>
@@ -403,9 +403,9 @@
 
       {% comment %} pay = bottles the customer pays for · total = bottles shipped (rest free via the automatic discount) {% endcomment %}
       tiers: [
-        { key: 't1', label: '1 Flasche', pay: 1, total: 1, badge: '', badgeColor: '', note: 'Einzelflasche zum Kennenlernen' },
-        { key: 't2', label: '2 + 1 GRATIS', pay: 2, total: 3, badge: 'Beliebt', badgeColor: '#c8202f' },
-        { key: 't3', label: '3 + 2 GRATIS', pay: 3, total: 5, badge: 'Bester Preis 🔥', badgeColor: '#17803d' }
+        { key: 't1', label: '1 bottle', pay: 1, total: 1, badge: '', badgeColor: '', note: 'A single bottle to try' },
+        { key: 't2', label: '2 + 1 FREE', pay: 2, total: 3, badge: 'Popular', badgeColor: '#c8202f' },
+        { key: 't3', label: '3 + 2 FREE', pay: 3, total: 5, badge: 'Best price 🔥', badgeColor: '#17803d' }
       ],
       selectedTierKey: 't1',
 
@@ -545,7 +545,7 @@
           items.push({
             id: Number(p.variant.id),
             quantity: 1,
-            properties: { 'Paket-Duft': p.name }
+            properties: { 'Bundle fragrance': p.name }
           });
         });
 
@@ -611,15 +611,15 @@
         fill="#1a1a1a"></circle>
     </svg>
     <div>
-      <p class="m-0 font-semibold tracking-normal text-black leading-snug">Versand am nächsten Tag aus Berlin 🇩🇪</p>
+      <p class="m-0 font-semibold tracking-normal text-black leading-snug">Ships the next day from Berlin 🇩🇪</p>
     </div>
   </div>
 {% else %}
   <div class="!my-6">
     <p class="my-0 text-center font-semibold tracking-normal">
-      Geliefert nach
+      Delivered to
       {{ localization.country.name }}
-      in 5 Werktagen.
+      within 5 business days.
     </p>
   </div>
 {% endif %}
@@ -639,15 +639,15 @@
 
     <div class="col-span-2 p-4 md:p-[18px]">
       <div class="inline-block rounded-xl bg-green-100 text-green-600 px-2 py-1 text-xs font-semibold uppercase">
-        Spare 64%
+        Save 64%
       </div>
       <h3 class="my-2 tracking-normal font-semibold text-base md:text-lg">
-        Unser bestes Angebot: Bundle zusammenstellen!
+        Our best offer: Build your bundle!
       </h3>
       <div class="m-0 tracking-normal text-black text-sm md:text-base">
-        Nur
+        Only
         <strong>{{ bundle_product.price | divided_by: 8 | money }}</strong>
-        pro Flasche
+        per bottle
       </div>
     </div>
   </a>
