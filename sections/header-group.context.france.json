@@ -1,0 +1,38 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "context": {
+    "market": "france"
+  },
+  "parent": "header-group.json",
+  "sections": {
+    "offer_timebar_ikdWJp": {
+      "settings": {
+        "prepend_text": "Vente d'entrepôt",
+        "countdown_date": "2026/09/13 23.59:59",
+        "append_text": "2 AU PRIX DE 1",
+        "link": "shopify://collections/best-sellers"
+      },
+      "blocks": {
+        "payment_icon_LdKcXg": {
+          "settings": {
+            "icon": "shopify://shop_images/dhl.webp",
+            "label": "Livraison rapide"
+          }
+        },
+        "payment_icon_M4XA7t": {
+          "settings": {
+            "label": "Origine UE"
+          }
+        }
+      }
+    }
+  }
+}
