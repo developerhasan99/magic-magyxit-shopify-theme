@@ -30,7 +30,7 @@
         "custom_liquid_epUFF4": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "{% render 'scent-profiling' %}"
+            "custom_liquid": "{% render 'scent-profiling' %}\n{% render 'quantity-breaker' %}"
           }
         },
         "price_MG94AW": {
@@ -56,6 +56,7 @@
         },
         "reactive_atc_LBDQE9": {
           "type": "reactive_atc",
+          "disabled": true,
           "settings": {}
         },
         "custom_liquid_QcxgR4": {
