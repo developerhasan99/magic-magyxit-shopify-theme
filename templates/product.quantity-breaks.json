@@ -33,6 +33,13 @@
             "custom_liquid": "{% render 'scent-profiling' %}\n{% render 'quantity-breaker' %}"
           }
         },
+        "money_back_guarantee_Qd3pda": {
+          "type": "money_back_guarantee",
+          "settings": {
+            "title": "Try it for 60 days, risk-free.",
+            "description": "If you're not completely satisfied, we'll refund the full amount!"
+          }
+        },
         "price_MG94AW": {
           "type": "price",
           "disabled": true,
@@ -216,6 +223,7 @@
         "custom_rating_text_ehyqmQ",
         "inspired_by_cMD9f8",
         "custom_liquid_epUFF4",
+        "money_back_guarantee_Qd3pda",
         "price_MG94AW",
         "variant_picker_hH3Diz",
         "buy_buttons_eXWBwX",
