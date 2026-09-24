@@ -104,10 +104,10 @@
         "primary_color": "#000000",
         "secondary_color": "#f0f0f0",
         "top_banner_text": "",
-        "prepend_text": "Warehouse Clearance!",
+        "prepend_text": "PAYDAY",
         "countdown_date": "",
-        "append_text": "2 For the price of 1!",
-        "link": "shopify://collections/bundle-profumi"
+        "append_text": "30% OFF ENTIRE CART",
+        "link": "shopify://collections/best-sellers"
       }
     },
     "header": {
