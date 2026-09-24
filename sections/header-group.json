@@ -24,59 +24,6 @@
         "link": "shopify://products/4x-30ml-perfume-bottles"
       }
     },
-    "blocky_lys_scrolling_text_bar_GLkKNr": {
-      "type": "blocky-lys-scrolling-text-bar",
-      "blocks": {
-        "text_KwnK4Y": {
-          "type": "text",
-          "disabled": true,
-          "settings": {
-            "text": "ENGINEERED FOR A CLEANER SHAVE"
-          }
-        },
-        "text_39tt9p": {
-          "type": "text",
-          "settings": {
-            "text": "MADE IN THE EU"
-          }
-        },
-        "text_DiPtyi": {
-          "type": "text",
-          "settings": {
-            "text": "FREE SHIPPING $65"
-          }
-        },
-        "text_7Mhc9j": {
-          "type": "text",
-          "settings": {
-            "text": "60-DAY GUARANTEE"
-          }
-        },
-        "text_QD7JEH": {
-          "type": "text",
-          "settings": {
-            "text": "SAFE & SECURE CHECKOUT"
-          }
-        }
-      },
-      "block_order": [
-        "text_KwnK4Y",
-        "text_39tt9p",
-        "text_DiPtyi",
-        "text_7Mhc9j",
-        "text_QD7JEH"
-      ],
-      "disabled": true,
-      "settings": {
-        "text_size": "1.5",
-        "background_color": "#000000",
-        "text_color": "#ffffff",
-        "speed": 1,
-        "text_spacing": 3,
-        "padding_top": 16,
-        "padding_bottom": 16
-      }
-    },
     "offer_timebar_ikdWJp": {
       "type": "offer-timebar",
       "blocks": {
@@ -128,12 +75,67 @@
         "padding_top": 20,
         "padding_bottom": 20
       }
+    },
+    "blocky_lys_scrolling_text_bar_GLkKNr": {
+      "type": "blocky-lys-scrolling-text-bar",
+      "blocks": {
+        "text_KwnK4Y": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "ENGINEERED FOR A CLEANER SHAVE"
+          }
+        },
+        "text_39tt9p": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "MADE IN THE EU"
+          }
+        },
+        "text_DiPtyi": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "FREE SHIPPING $65"
+          }
+        },
+        "text_7Mhc9j": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "60-DAY GUARANTEE"
+          }
+        },
+        "text_QD7JEH": {
+          "type": "text",
+          "settings": {
+            "text": "Magic Perfume becomes MagyX!"
+          }
+        }
+      },
+      "block_order": [
+        "text_KwnK4Y",
+        "text_39tt9p",
+        "text_DiPtyi",
+        "text_7Mhc9j",
+        "text_QD7JEH"
+      ],
+      "settings": {
+        "text_size": "1.5",
+        "background_color": "#000000",
+        "text_color": "#ffffff",
+        "speed": 1,
+        "text_spacing": 3,
+        "padding_top": 16,
+        "padding_bottom": 16
+      }
     }
   },
   "order": [
     "offer_annoucement_4tnBfB",
-    "blocky_lys_scrolling_text_bar_GLkKNr",
     "offer_timebar_ikdWJp",
-    "header"
+    "header",
+    "blocky_lys_scrolling_text_bar_GLkKNr"
   ]
 }
