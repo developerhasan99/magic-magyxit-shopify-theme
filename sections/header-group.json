@@ -40,11 +40,27 @@
             "icon": "shopify://shop_images/65f2284e66ff1dcb1a272319f1ef543c429f73e2.png",
             "label": "EU-Certified"
           }
+        },
+        "payment_icon_8kztx8": {
+          "type": "payment_icon",
+          "settings": {
+            "icon": "shopify://shop_images/download.png",
+            "label": "Instant"
+          }
+        },
+        "payment_icon_zpwMR9": {
+          "type": "payment_icon",
+          "settings": {
+            "icon": "shopify://shop_images/Mastercard_logo.jpg",
+            "label": "Secure"
+          }
         }
       },
       "block_order": [
         "payment_icon_LdKcXg",
-        "payment_icon_M4XA7t"
+        "payment_icon_M4XA7t",
+        "payment_icon_8kztx8",
+        "payment_icon_zpwMR9"
       ],
       "name": "Offer Timebar",
       "settings": {
@@ -52,9 +68,11 @@
         "secondary_color": "#f0f0f0",
         "top_banner_text": "",
         "prepend_text": "PAYDAY",
+        "show_flipclock": true,
         "countdown_date": "",
         "append_text": "30% OFF ENTIRE CART",
-        "link": "shopify://collections/best-sellers"
+        "link": "shopify://collections/best-sellers",
+        "show_badges": true
       }
     },
     "header": {
