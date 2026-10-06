@@ -17,7 +17,7 @@
     <div class="text-sm italic text-gray-500">80% of our customers choose 50 ml</div>
   </div>
 
-  <div class="flex gap-3" id="variant-selector">
+  <div class="flex flex-row-reverse gap-3" id="variant-selector">
     {% for variant in product.variants %}
       <button
         type="button"
@@ -98,7 +98,7 @@
 <div class="!my-6">
   <p class="my-0 text-center font-semibold tracking-normal">
     Delivered to
-    <span class="shipping_location">Worldwide</span>
+    <span class="shipping_location">{{ localization.country.name }}</span>
     in 5 business days.
   </p>
 </div>
@@ -181,22 +181,6 @@
         updateVariant(variantId);
       });
     });
-
-    // Update shipping location under ATC
-    const shippingLocation = document.querySelector('.shipping_location');
-    if (shippingLocation) {
-    fetch('https://ipapi.co/country_name/')
-      .then((response) => {
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return response.text();
-      })
-      .then((countryName) => {
-        shippingLocation.textContent = countryName.trim();
-      })
-      .catch(() => {
-        // Leave existing text in place if lookup fails
-      });
-    }
   })();
 </script>
 
