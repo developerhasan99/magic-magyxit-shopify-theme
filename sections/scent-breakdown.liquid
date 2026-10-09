@@ -1,3 +1,23 @@
+{% liquid
+  # Products tagged 'own_gallery' use their own image, no marketing images (same as product-media-gallery)
+  unless product.tags contains 'own_gallery'
+    assign it_image = shop.metaobjects['marketing_images']['italian'].images.value
+    assign es_image = shop.metaobjects['marketing_images']['spanish'].images.value
+    assign pt_image = shop.metaobjects['marketing_images']['portuguese'].images.value
+    assign fr_image = shop.metaobjects['marketing_images']['france'].images.value
+    assign de_image = shop.metaobjects['marketing_images']['german'].images.value
+    assign en_image = shop.metaobjects['marketing_images']['english'].images.value
+  endunless
+
+  assign breakdown_image = blank
+  for item in it_image limit: 1
+    assign breakdown_image = item
+  endfor
+  if breakdown_image == blank
+    assign breakdown_image = product.images[1]
+  endif
+%}
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -19,13 +39,14 @@
   <div class="page-width">
     <div class="grid md:grid-cols-2 gap-8">
       <div>
-        {% if product.images.size > 1 %}
+        {% if breakdown_image %}
           <img
+            id="scent-breakdown-img-{{ section.id }}"
             class="w-full h-full rounded-lg object-cover"
-            src="{{ product.images[1] | image_url }}"
+            src="{{ breakdown_image | image_url: width: 1080 }}"
             alt="Scent Breakdown"
-            height="{{ product.images[1].height }}"
-            width="{{ product.images[1].width }}">
+            height="{{ breakdown_image.height }}"
+            width="{{ breakdown_image.width }}">
         {% endif %}
       </div>
       <div>
@@ -38,7 +59,7 @@
         <div class="bg-white p-4 rounded-lg grid grid-cols-3 gap-4 !mb-3">
           <div>
             <h3 class="m-0 tracking-normal font-semibold">
-             Top Notes
+              Top Notes
             </h3>
           </div>
           <div class="col-span-2">
@@ -73,6 +94,42 @@
   </div>
 </div>
 
+{% if it_image %}
+  <script>
+    (function () {
+      // Scent breakdown image per Weglot language (falls back to Italian)
+      var localImages = {
+        it: {{ it_image | image_url: width: 1080 | json }},
+        es: {{ es_image | image_url: width: 1080 | json }},
+        pt: {{ pt_image | image_url: width: 1080 | json }},
+        fr: {{ fr_image | image_url: width: 1080 | json }},
+        de: {{ de_image | image_url: width: 1080 | json }},
+        en: {{ en_image | image_url: width: 1080 | json }}
+      };
+
+      function changeLocalImage(newLang) {
+        var img = document.getElementById('scent-breakdown-img-{{ section.id }}');
+        if (img) img.src = localImages[newLang] || localImages.it;
+      }
+
+      function init() {
+        if (!window.Weglot) return;
+        if (typeof Weglot.getCurrentLang === 'function' && Weglot.getCurrentLang()) {
+          changeLocalImage(Weglot.getCurrentLang());
+        }
+        Weglot.on('initialized', function () { changeLocalImage(Weglot.getCurrentLang()); });
+        Weglot.on('languageChanged', changeLocalImage);
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+{% endif %}
+
 {% schema %}
   {
     "name": "Scent Breakdown",
@@ -101,7 +158,8 @@
         "unit": "px",
         "label": "t:sections.all.padding.padding_top",
         "default": 36
-      }, {
+      },
+      {
         "type": "range",
         "id": "padding_bottom",
         "min": 0,
