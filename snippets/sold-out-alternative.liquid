@@ -1,0 +1,151 @@
+{% comment %}
+  Renders a sold-out notice in place of the size selector + add to cart form, and,
+  when the product's `custom.recommended_alternative` list contains an in-stock product,
+  a recommended-alternative card with its own add to cart.
+
+  Accepts:
+  - product: {Object} The sold-out product
+
+  Usage:
+  {% render 'sold-out-alternative', product: product %}
+{% endcomment %}
+
+{%- liquid
+  assign alt = false
+  for p in product.metafields.custom.recommended_alternative.value
+    if p.available and p.id != product.id
+      assign alt = p
+      break
+    endif
+  endfor
+-%}
+
+<style>
+  .soa-select-none { user-select: none; -webkit-user-select: none; }
+  .soa-notice-title { font-size: 16px; }
+  @media screen and (min-width: 750px) { .soa-notice-title { font-size: 19px; } }
+  .soa-w-20 { width: 5rem; }
+  .soa-h-20 { height: 5rem; }
+  .soa-dot { width: 0.5rem; height: 0.5rem; }
+  .soa-tile:has(:checked) { border-color: rgb(0 0 0); }
+  .soa-tile:has(:focus-visible) { outline: 2px solid rgb(0 0 0); outline-offset: 2px; }
+</style>
+
+<div
+  aria-disabled="true"
+  class="!mt-6 flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-100 text-gray-500 !py-3 px-3 text-center cursor-not-allowed soa-select-none">
+  <span class="leading-snug font-semibold soa-notice-title">{{ 'products.product.sold_out' | t }} – temporarily out of stock</span>
+  <span class="text-sm leading-snug">
+    {%- if alt -%}
+      This item can't be ordered right now. Try our alternative below.
+    {%- else -%}
+      This item can't be ordered right now.
+    {%- endif -%}
+  </span>
+</div>
+
+{%- if alt -%}
+  {%- liquid
+    assign alt_selected = alt.selected_or_first_available_variant
+    for v in alt.variants
+      if v.available and v.title contains '100'
+        assign alt_selected = v
+        break
+      endif
+    endfor
+  -%}
+
+  <div data-sold-out-alternative class="mt-4 rounded-xl border-2 border-solid border-gray-200 overflow-hidden bg-white">
+    <div class="text-white font-semibold px-4 py-2 bg-[#146b32]">✓ Recommended alternative</div>
+    <div class="p-4">
+      <a href="{{ alt.url }}" class="flex items-center gap-4 no-underline text-black">
+        {%- if alt.featured_image -%}
+          <img
+            src="{{ alt.featured_image | image_url: width: 160 }}"
+            alt="{{ alt.featured_image.alt | default: alt.title | escape }}"
+            width="80"
+            height="80"
+            class="soa-w-20 soa-h-20 object-contain shrink-0"
+            loading="lazy">
+        {%- endif -%}
+        <div>
+          <h2 class="my-0 font-semibold text-lg tracking-tight">{{ alt.title }}</h2>
+          {%- if alt.metafields.custom.inspiration != blank -%}
+            <p class="text-base tracking-normal my-0 text-gray-700 leading-snug">Inspired By {{ alt.metafields.custom.inspiration.value.name }}</p>
+          {%- endif -%}
+          <p class="mt-1 mb-0 text-sm text-green-700 flex items-center gap-1.5">
+            <span class="inline-block soa-dot rounded-full bg-green-600"></span>
+            {{- 'products.product.inventory_in_stock' | t -}}
+          </p>
+        </div>
+      </a>
+
+      <product-form class="product-form !m-0" data-section-id="{{ section.id }}">
+        {%- form 'product', alt, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+          {%- if alt.variants.size > 1 -%}
+            <div class="flex justify-between items-center mb-3 !mt-6">
+              <h2 class="m-0 text-base font-semibold">Select the size:</h2>
+              <div class="text-sm italic text-gray-500">80% of our customers choose 50 ml</div>
+            </div>
+            <div class="flex flex-row-reverse gap-3 mb-3" role="radiogroup" aria-label="Select the size:">
+              {%- for v in alt.variants -%}
+                {%- if v.available -%}
+                  <label class="soa-tile flex-grow flex justify-center gap-2 rounded-lg px-2 pt-4 pb-3 bg-white border-2 border-solid cursor-pointer font-['Plus_Jakarta_Sans'] relative border-gray-200">
+                    <input class="sr-only" type="radio" name="id" value="{{ v.id }}" {% if v.id == alt_selected.id %}checked{% endif %}>
+                    <div class="text-center">
+                      <div class="text-base font-semibold">{{ v.title }}</div>
+                    </div>
+                    {% if v.title contains '50' %}
+                      <span class="text-xs italic text-white rounded absolute -top-2.5 left-1/2 [transform:translateX(-50%)] bg-[#c8202f] px-2 py-0.5">Popular</span>
+                    {% endif %}
+                    {% if v.title contains '100' %}
+                      <span class="text-xs text-nowrap italic text-white rounded absolute -top-2.5 left-1/2 [transform:translateX(-50%)] bg-[#22613a] px-2 py-0.5">Best seller</span>
+                    {% endif %}
+                  </label>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          {%- else -%}
+            <input type="hidden" name="id" value="{{ alt_selected.id }}">
+          {%- endif -%}
+
+          {% comment %} No id / cta_product_from_submit_btn: the main reactive-atc and floating-atc scripts query those {% endcomment %}
+          <button
+            type="submit"
+            name="add"
+            value="1"
+            class="atc-button shimmer-btn flex flex-wrap items-center !mb-0 text-2xl !py-3 !px-2 rounded-lg button hover:bg-[#17803d] bg-[#146b32] transition-colors shadow-xl tracking-normal button--full-width button--primary"
+            aria-label="{{ 'products.product.add_to_cart' | t }}: {{ alt.title | escape }}">
+            <span>{{ 'products.product.add_to_cart' | t }}</span>
+            <div class="ml-2 pl-2 border-0 border-l flex items-center border-solid border-gray-200/20">
+              <div class="inline-block text-lg bg-[#0c5224] px-3 rounded" role="status">
+                {%- for v in alt.variants -%}
+                  {%- if v.available -%}
+                    <span data-price-for="{{ v.id }}" {% unless v.id == alt_selected.id %}hidden{% endunless %}>
+                      {%- if v.compare_at_price > v.price -%}
+                        <span class="line-through text-white/50 text-base">{{ v.compare_at_price | money }}</span>
+                      {% endif -%}
+                      {{ v.price | money }}
+                    </span>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
+            {%- render 'loading-spinner' -%}
+          </button>
+        {%- endform -%}
+      </product-form>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('[data-sold-out-alternative] form').forEach(function (form) {
+      form.addEventListener('change', function (e) {
+        if (e.target.name !== 'id') return;
+        form.querySelectorAll('[data-price-for]').forEach(function (el) {
+          el.hidden = el.dataset.priceFor !== e.target.value;
+        });
+      });
+    });
+  </script>
+{%- endif -%}

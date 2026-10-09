@@ -10,6 +10,9 @@
   endfor
 %}
 
+{% unless product.available %}
+  {% render 'sold-out-alternative', product: product %}
+{% else %}
 {% if product.variants.size > 1 %}
   {% comment %} Variant Selector {% endcomment %}
   <div class="flex justify-between items-center mb-3 !mt-6">
@@ -84,6 +87,7 @@
     </button>
   {%- endform -%}
 </product-form>
+{% endunless %}
 
 <div>
   <img
@@ -124,6 +128,7 @@
     const variantButtons = document.querySelectorAll('.variant-button');
     const variantIdInput = document.getElementById('product-variant-id');
     const priceContainer = document.getElementById('product-price');
+    if (!variantIdInput || !priceContainer) return;
     const comparePriceSpan = priceContainer.querySelector('.compare-price');
     const currentPriceSpan = priceContainer.querySelector('.current-price');
 
