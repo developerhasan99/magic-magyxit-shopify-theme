@@ -89,8 +89,8 @@
         {%- endif -%}
         <div>
           <h2 class="my-0 font-semibold text-lg tracking-tight">{{ alt.title }}</h2>
-          {%- if alt.metafields.custom.inspiration != blank -%}
-            <p class="text-base tracking-normal my-0 text-gray-700 leading-snug">Inspired By {{ alt.metafields.custom.inspiration.value.name }}</p>
+          {%- if alt.metafields.custom.inspired_by.value != blank -%}
+            <p class="text-base tracking-normal my-0 text-gray-700 leading-snug">Inspired By {{ alt.metafields.custom.inspired_by.value.title }}</p>
           {%- endif -%}
           <p class="mt-1 mb-0 text-sm text-green-700 flex items-center gap-1.5">
             <span class="inline-block soa-dot rounded-full bg-green-600"></span>
