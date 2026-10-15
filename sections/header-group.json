@@ -62,6 +62,7 @@
         "payment_icon_8kztx8",
         "payment_icon_zpwMR9"
       ],
+      "disabled": true,
       "name": "Offer Timebar",
       "settings": {
         "primary_color": "#000000",
