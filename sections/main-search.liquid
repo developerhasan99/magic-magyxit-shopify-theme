@@ -264,6 +264,11 @@
               <ul class="grid_layout product-grid  grid--{{ section.settings.columns_mobile }}-col-tablet-down grid--{{ section.settings.columns_desktop }}-col-desktop" role="list">
                 {%- assign skip_card_product_styles = false -%}
                 {%- for item in search.results -%}
+                  {% if item.object_type == 'product' %}
+                    {% if item.handle == 'gratis-mystikk-parfum-3ml' or item.tags contains 'Bundle_Price_Show' %}
+                      {% continue %}
+                    {% endif %}
+                  {% endif %}
                   {% assign lazy_load = false %}
                   {%- if forloop.index > 2 -%}
                     {%- assign lazy_load = true -%}
