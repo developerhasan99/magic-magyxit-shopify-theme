@@ -903,7 +903,7 @@
                 </div>
                 {% when 'reactive_atc' %}
                   {% if product.tags contains 'bundle' %}
-                    {% render 'bundle-builder' %}
+                    {% render 'bundle-builder', block: block %}
                   {% else %}
                     {% render 'reactive-atc' %}
                   {% endif %}
@@ -1167,7 +1167,23 @@
     },
     {
       "type": "reactive_atc",
-      "name": "Reactive ATC"
+      "name": "Reactive ATC",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "skip_atc_button",
+          "label": "Skip add to cart button",
+          "default": true,
+          "info": "Add the bundle to cart as soon as all products are selected. When off, the modal just closes and the shopper clicks the button."
+        },
+        {
+          "type": "checkbox",
+          "id": "open_checkout",
+          "label": "Go to checkout after adding",
+          "default": false,
+          "info": "When off, the cart drawer opens instead."
+        }
+      ]
     },
     {
       "type": "money_back_guarantee",

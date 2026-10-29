@@ -226,8 +226,9 @@
 
         if (this.selectedProducts.length === {{ product_count }}) {
           this.showModal = false;
-          // Do auto ATC and redirect to checkout
-          this.doATCandCheckout();
+          {% if block.settings.skip_atc_button %}
+            this.doATCandCheckout();
+          {% endif %}
         }
       },
       removeOne(productId) {
@@ -273,6 +274,12 @@
           }]
         };
 
+        const cart = {% if block.settings.open_checkout %}null{% else %}document.querySelector('cart-drawer'){% endif %};
+        if (cart) {
+          items.sections = cart.getSectionsToRender().map(s => s.id);
+          items.sections_url = window.location.pathname;
+        }
+
         // Make the API call
         fetch('/cart/add.js', {
           method: 'POST',
@@ -290,9 +297,16 @@
           }
           return data;
         })
-        .then(() => {
-          // Redirect to cart after successful addition
-          window.location.href = '/checkout';
+        .then(data => {
+          // Reset the bundle (fixed bundles keep their preset products)
+          {% unless product.tags contains 'fixed_bundle' %}
+            this.selectedProducts = [];
+          {% endunless %}
+          if (cart) {
+            cart.renderContents(data);
+          } else {
+            window.location.href = {% if block.settings.open_checkout %}'/checkout'{% else %}'/cart'{% endif %};
+          }
         })
         .catch(error => {
           console.error('Error adding to cart:', error, error.response || '');
