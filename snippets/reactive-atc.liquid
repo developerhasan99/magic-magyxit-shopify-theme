@@ -11,82 +11,83 @@
 %}
 
 {% unless product.available %}
-  {% render 'sold-out-alternative', product: product %}
-{% else %}
-{% if product.variants.size > 1 %}
-  {% comment %} Variant Selector {% endcomment %}
-  <div class="flex justify-between items-center mb-3 !mt-6">
-    <h2 class="m-0 text-base font-semibold">Select the size:</h2>
-    <div class="text-sm italic text-gray-500">80% of our customers choose 50 ml</div>
-  </div>
+  {% render 'sold-out-alternative'
+    , product: product %}
+  {% else %}
+  {% if product.variants.size > 1 %}
+    {% comment %} Variant Selector {% endcomment %}
+    <div class="flex justify-between items-center mb-3 !mt-6">
+      <h2 class="m-0 text-base font-semibold">Select the size:</h2>
+      <div class="text-sm italic text-gray-500">80% of our customers choose 50 ml</div>
+    </div>
 
-  <div class="flex flex-row-reverse gap-3" id="variant-selector">
-    {% for variant in product.variants %}
-      <button
-        type="button"
-        class="variant-button flex-grow flex justify-center gap-2 rounded-lg px-2 pt-4 pb-3 bg-white border-2 border-solid cursor-pointer font-['Plus_Jakarta_Sans'] relative {% if variant.id == selected_variant.id %}border-black{% else %}border-gray-200{% endif %}"
-        data-variant-id="{{ variant.id }}"
-        data-variant-title="{{ variant.title }}"
-        data-original-price="{{ variant.price | money }}"
-        data-compare-price="{{ variant.compare_at_price | money }}">
-        <div class="text-center">
-          <div class="text-base font-semibold">{{ variant.title }}</div>
-        </div>
-        {% if variant.title contains '50' %}
-          <span class="text-xs italic text-white rounded absolute -top-2.5 left-1/2 [transform:translateX(-50%)] bg-[#c8202f] px-2 py-0.5">Popular</span>
-        {% endif %}
-        {% if variant.title contains '100' %}
-          <span class="text-xs text-nowrap italic text-white rounded absolute -top-2.5 left-1/2 [transform:translateX(-50%)] bg-[#22613a] px-2 py-0.5">Best seller</span>
-        {% endif %}
-      </button>
-    {% endfor %}
-  </div>
-{% endif %}
-
-{% comment %} Add to cart form {% endcomment %}
-<product-form
-  class="product-form !m-0"
-  data-hide-errors="{{ gift_card_recipient_feature_active }}"
-  data-section-id="{{ section.id }}">
-  {%- form 'product'
-    , product
-    , id: product_form_id
-    , class: 'form'
-    , novalidate: 'novalidate'
-    , data-type: 'add-to-cart-form'
-  -%}
-    <input
-      type="hidden"
-      name="id"
-      id="product-variant-id"
-      value="{{ selected_variant.id }}"
-      class="product-variant-id">
-    <button
-      type="submit"
-      name="add"
-      value="1"
-      class="atc-button shimmer-btn cta_product_from_submit_btn flex flex-wrap items-center !mb-0 text-2xl !py-3 !px-2 rounded-lg button hover:bg-[#17803d] bg-[#146b32] transition-colors shadow-xl tracking-normal button--full-width button--primary"
-      aria-label="Add to cart"
-      {% if product.metafields.custom.choose_your_fragrances_options != blank %}
-      disabled="disabled"
-      {% endif %}>
-      <span>{{ 'products.product.add_to_cart' | t }}</span>
-      <div class="ml-2 pl-2 border-0 border-l flex items-center border-solid border-gray-200/20">
-        <div
-          class="inline-block text-lg bg-[#0c5224] px-3 rounded"
-          id="product-price"
-          role="status"
-          {{ block.shopify_attributes }}>
-          {% if selected_variant.compare_at_price > selected_variant.price %}
-            <span class="compare-price line-through text-white/50 text-base">{{ selected_variant.compare_at_price | money }}</span>
+    <div class="flex flex-row-reverse gap-3" id="variant-selector">
+      {% for variant in product.variants %}
+        <button
+          type="button"
+          class="variant-button flex-grow flex justify-center gap-2 rounded-lg px-2 pt-4 pb-3 bg-white border-2 border-solid cursor-pointer font-['Plus_Jakarta_Sans'] relative {% if variant.id == selected_variant.id %}border-black{% else %}border-gray-200{% endif %}"
+          data-variant-id="{{ variant.id }}"
+          data-variant-title="{{ variant.title }}"
+          data-original-price="{{ variant.price | money }}"
+          data-compare-price="{{ variant.compare_at_price | money }}">
+          <div class="text-center">
+            <div class="text-base font-semibold">{{ variant.title }}</div>
+          </div>
+          {% if variant.title contains '50' %}
+            <span class="text-xs italic text-white rounded absolute -top-2.5 left-1/2 [transform:translateX(-50%)] bg-[#c8202f] px-2 py-0.5">Popular</span>
           {% endif %}
-          <span class="current-price">{{ selected_variant.price | money }}</span>
+          {% if variant.title contains '100' %}
+            <span class="text-xs text-nowrap italic text-white rounded absolute -top-2.5 left-1/2 [transform:translateX(-50%)] bg-[#22613a] px-2 py-0.5">Best seller</span>
+          {% endif %}
+        </button>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% comment %} Add to cart form {% endcomment %}
+  <product-form
+    class="product-form !m-0"
+    data-hide-errors="{{ gift_card_recipient_feature_active }}"
+    data-section-id="{{ section.id }}">
+    {%- form 'product'
+      , product
+      , id: product_form_id
+      , class: 'form'
+      , novalidate: 'novalidate'
+      , data-type: 'add-to-cart-form'
+    -%}
+      <input
+        type="hidden"
+        name="id"
+        id="product-variant-id"
+        value="{{ selected_variant.id }}"
+        class="product-variant-id">
+      <button
+        type="submit"
+        name="add"
+        value="1"
+        class="atc-button shimmer-btn cta_product_from_submit_btn flex flex-wrap items-center !mb-0 text-2xl !py-3 !px-2 rounded-lg button hover:bg-[#17803d] bg-[#146b32] transition-colors shadow-xl tracking-normal button--full-width button--primary"
+        aria-label="Add to cart"
+        {% if product.metafields.custom.choose_your_fragrances_options != blank %}
+        disabled="disabled"
+        {% endif %}>
+        <span>{{ 'products.product.add_to_cart' | t }}</span>
+        <div class="ml-2 pl-2 border-0 border-l flex items-center border-solid border-gray-200/20">
+          <div
+            class="inline-block text-lg bg-[#0c5224] px-3 rounded"
+            id="product-price"
+            role="status"
+            {{ block.shopify_attributes }}>
+            {% if selected_variant.compare_at_price > selected_variant.price %}
+              <span class="compare-price line-through text-white/50 text-base">{{ selected_variant.compare_at_price | money }}</span>
+            {% endif %}
+            <span class="current-price">{{ selected_variant.price | money }}</span>
+          </div>
         </div>
-      </div>
-      {%- render 'loading-spinner' -%}
-    </button>
-  {%- endform -%}
-</product-form>
+        {%- render 'loading-spinner' -%}
+      </button>
+    {%- endform -%}
+  </product-form>
 {% endunless %}
 
 <div>
@@ -188,18 +189,3 @@
     });
   })();
 </script>
-
-<div class="my-6">
-  <div class="flex items-center gap-3 text-base">
-    <img
-      src="https://cdn.shopify.com/s/files/1/0623/0691/0402/files/thimbs_up.png?v=1751372431"
-      alt="Thumbs up badge"
-      class="w-10 h-10 flex-shrink-0"
-      width="40"
-      height="40" />
-    <div class="text-slate-900">
-      <strong class="font-semibold">Try it for 60 days, risk-free.</strong>
-      <div class="[display:none] md:block">If you're not completely satisfied, we'll refund the full amount!</div>
-    </div>
-  </div>
-</div>
