@@ -193,8 +193,13 @@
                     </div>
 
                     <div class="flex min-w-0 flex-1 flex-col justify-center p-4 md:p-5">
-                       <div class="self-start text-red-600 text-xs md:text-sm font-bold tracking-normal leading-snug">
-                        BLACK FRIDAY: 40% OFF+ 2 BOTTLES FREE!</div>
+                      {% if block.settings.product.compare_at_price > block.settings.product.price %}
+                        {% assign discount = block.settings.product.compare_at_price | minus: block.settings.product.price %}
+                        {% assign discount_percent = discount | times: 100 | divided_by: block.settings.product.compare_at_price | round %}
+                        <span class="inline-block self-start rounded-full bg-green-100 text-green-700 px-2 py-0.5 text-xs font-semibold uppercase tracking-wide">
+                          {{ 'bundle.tsr_offer_save' | t: percent: discount_percent }}
+                        </span>
+                      {% endif %}
                       <h3 class="mt-2 mb-1 tracking-normal font-semibold leading-snug text-slate-900 text-sm sm:text-base md:text-lg">
                         {{ 'bundle.tsr_offer_heading' | t }}
                       </h3>
