@@ -547,9 +547,10 @@
     }
   },
   "bundle": {
-    "tsr_offer_save": "Risparmia il {{ percent }}%",
-    "tsr_offer_heading": "La nostra migliore offerta: crea il tuo bundle!",
-    "tsr_offer_price_prefix": "Solo",
-    "tsr_offer_price_suffix": "a bottiglia"
-  }
+  "tsr_offer_save": "Risparmia il {{ percent }}%",
+  "tsr_offer_heading": "La nostra migliore offerta: crea il tuo bundle!",
+  "tsr_offer_price_prefix": "Solo",
+  "tsr_offer_price_suffix": "a bottiglia",
+  "tsr_offer_black_friday": "Black Friday: 40% di sconto + 2 flaconi in omaggio!"
+}
 }
