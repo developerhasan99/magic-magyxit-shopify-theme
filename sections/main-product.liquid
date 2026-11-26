@@ -229,6 +229,57 @@
                     {% endif %}
                   </div>
                 {% endif %}
+
+                 
+          {%- when 'selling_points' -%}
+           {%- capture magyx_check_icon -%}
+         <svg
+          width="22"
+          height="22"
+          viewBox="0 0 22 22"
+          aria-hidden="true"
+          focusable="false"
+          class="flex-none"
+          >
+      <circle cx="11" cy="11" r="11" fill="#22613A"/>
+      <path
+        d="M6.6 11.4l2.9 2.9 5.9-5.9"
+        fill="none"
+        stroke="#fff"
+        stroke-width="1.4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+    {%- endcapture -%}
+
+    <ul
+    class="list-none flex flex-col gap-2 mt-4 mb-4 p-0"
+    {{ block.shopify_attributes }}
+     >
+    {%- if block.settings.benefit_1 != blank -%}
+      <li class="flex items-center gap-2.5 min-h-[22px] m-0 p-0 text-[15px] leading-5 font-semibold text-gray-900">
+        {{ magyx_check_icon }}
+        <span>{{ block.settings.benefit_1 }}</span>
+      </li>
+    {%- endif -%}
+
+    {%- if block.settings.benefit_2 != blank -%}
+      <li class="flex items-center gap-2.5 min-h-[22px] m-0 p-0 text-[15px] leading-5 font-semibold text-gray-900">
+        {{ magyx_check_icon }}
+        <span>{{ block.settings.benefit_2 }}</span>
+      </li>
+    {%- endif -%}
+
+    {%- if block.settings.benefit_3 != blank -%}
+      <li class="flex items-center gap-2.5 min-h-[22px] m-0 p-0 text-[15px] leading-5 font-semibold text-gray-900">
+        {{ magyx_check_icon }}
+        <span>{{ block.settings.benefit_3 }}</span>
+      </li>
+    {%- endif -%}
+    </ul>
+
+
               {%- when 'price' -%}
                 <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                   {%- render 'price',
@@ -1313,6 +1364,33 @@
       "name": "Inspired By",
       "limit": 1
     },
+
+   {
+  "type": "selling_points",
+  "name": "Selling Points",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "text",
+      "id": "benefit_1",
+      "label": "Claim 1",
+      "default": "Up to 12 hours of fragrance longevity"
+    },
+    {
+      "type": "text",
+      "id": "benefit_2",
+      "label": "Claim 2",
+      "default": "Approximately 95% scent similarity"
+    },
+    {
+      "type": "text",
+      "id": "benefit_3",
+      "label": "Claim 3",
+      "default": "Free from parabens and phthalates"
+    }
+   ]
+    },
+
     {
       "type": "expanded_notes",
       "name": "Expanded Notes",

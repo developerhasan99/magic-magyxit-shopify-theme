@@ -27,6 +27,14 @@
           "disabled": true,
           "settings": {}
         },
+        "selling_points_magyx": {
+        "type": "selling_points",
+        "settings": {
+        "benefit_1": "Up to 12 hours of fragrance longevity",
+        "benefit_2": "Approximately 95% scent similarity",
+         "benefit_3": "Free from parabens and phthalates"
+         }
+         },
         "custom_liquid_epUFF4": {
           "type": "custom_liquid",
           "settings": {
@@ -226,10 +234,11 @@
           }
         }
       },
-      "block_order": [
-        "title_DkyBTh",
-        "custom_rating_text_ehyqmQ",
-        "inspired_by_cMD9f8",
+       "block_order": [
+       "title_DkyBTh",
+       "custom_rating_text_ehyqmQ",
+       "inspired_by_cMD9f8",
+       "selling_points_magyx",
         "custom_liquid_epUFF4",
         "price_MG94AW",
         "variant_picker_hH3Diz",
