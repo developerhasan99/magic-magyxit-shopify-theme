@@ -548,6 +548,7 @@
     "tsr_offer_save": "Save {{ percent }}%",
     "tsr_offer_heading": "Our best deal: Build your own bundle!",
     "tsr_offer_price_prefix": "Only",
-    "tsr_offer_price_suffix": "per bottle"
+    "tsr_offer_price_suffix": "per bottle",
+    "tsr_offer_black_friday": "Black Friday: 40% off + 2 bottles as a bonus!"
   }
 }
