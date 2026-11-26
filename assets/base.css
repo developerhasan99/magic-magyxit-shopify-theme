@@ -3574,12 +3574,4 @@ details-disclosure > details {
   100% {
     transform: translateX(100%) scaleX(0);
   }
-  /* MAGYX selling points – bold black text */
-.product__info-container .selling-points-list li span {
-  font-weight: 700 !important;
-  color: #000000 !important;
-  font-size: 10px !important;
-  line-height: 13px !important;
-  letter-spacing: normal !important;
-}
 }
