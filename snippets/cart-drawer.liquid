@@ -62,6 +62,7 @@
         </div>
       {% endif %}
 
+      {%- if cart != empty -%}{%- render 'cart-promo-notice' -%}{%- endif -%}
       <cart-drawer-items
         {% if cart == empty %}
         class=" is-empty"
