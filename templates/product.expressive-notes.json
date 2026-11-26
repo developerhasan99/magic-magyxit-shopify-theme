@@ -28,12 +28,12 @@
           "settings": {}
         },
         "selling_points_magyx": {
-        "type": "selling_points",
-        "settings": {
-        "benefit_1": "Up to 12 hours of fragrance longevity",
-        "benefit_2": "Approximately 95% scent similarity",
-         "benefit_3": "Free from parabens and phthalates"
-         }
+          "type": "selling_points",
+         "settings": {
+         "benefit_1": "20% perfume oil for up to 12 hours of fragrance",
+        "benefit_2": "95% scent similarity. Same oils from Grasse",
+        "benefit_3": "No phthalates, no parabens"
+        }
          },
         "custom_liquid_epUFF4": {
           "type": "custom_liquid",
