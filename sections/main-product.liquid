@@ -257,26 +257,34 @@
     class="list-none flex flex-col gap-2 mt-4 mb-4 p-0"
     {{ block.shopify_attributes }}
      >
-    {%- if block.settings.benefit_1 != blank -%}
-      <li class="flex items-center gap-2.5 min-h-[22px] m-0 p-0 text-[15px] leading-5 font-semibold text-gray-900">
-        {{ magyx_check_icon }}
-        <span>{{ block.settings.benefit_1 }}</span>
-      </li>
-    {%- endif -%}
+    
+{%- if block.settings.benefit_1 != blank -%}
+  <li class="flex items-start gap-2.5 m-0 p-0 text-sm leading-5 font-normal text-gray-900">
+    <span class="flex-none mt-[2px]">
+      {{ magyx_check_icon }}
+    </span>
+    <span class="flex-1 min-w-0">{{ block.settings.benefit_1 }}</span>
+  </li>
+{%- endif -%}
 
-    {%- if block.settings.benefit_2 != blank -%}
-      <li class="flex items-center gap-2.5 min-h-[22px] m-0 p-0 text-[15px] leading-5 font-semibold text-gray-900">
-        {{ magyx_check_icon }}
-        <span>{{ block.settings.benefit_2 }}</span>
-      </li>
-    {%- endif -%}
+{%- if block.settings.benefit_2 != blank -%}
+  <li class="flex items-start gap-2.5 m-0 p-0 text-sm leading-5 font-normal text-gray-900">
+    <span class="flex-none mt-[2px]">
+      {{ magyx_check_icon }}
+    </span>
+    <span class="flex-1 min-w-0">{{ block.settings.benefit_2 }}</span>
+  </li>
+{%- endif -%}
 
-    {%- if block.settings.benefit_3 != blank -%}
-      <li class="flex items-center gap-2.5 min-h-[22px] m-0 p-0 text-[15px] leading-5 font-semibold text-gray-900">
-        {{ magyx_check_icon }}
-        <span>{{ block.settings.benefit_3 }}</span>
-      </li>
-    {%- endif -%}
+{%- if block.settings.benefit_3 != blank -%}
+  <li class="flex items-start gap-2.5 m-0 p-0 text-sm leading-5 font-normal text-gray-900">
+    <span class="flex-none mt-[2px]">
+      {{ magyx_check_icon }}
+    </span>
+    <span class="flex-1 min-w-0">{{ block.settings.benefit_3 }}</span>
+  </li>
+{%- endif -%}
+
     </ul>
 
 
