@@ -165,6 +165,9 @@
         "image_available": "L'immagine {{ index }} è ora disponibile in visualizzazione galleria"
       },
       "view_full_details": "Visualizza dettagli completi",
+      "selling_point_1": "20% di olio profumato per 12 ore",
+       "selling_point_2": "95% di somiglianza. Stessi oli di Grasse",
+       "selling_point_3": "Senza ftalati, senza parabeni",
       "shipping_policy_html": "<a href=\"{{ link }}\">Spese di spedizione</a> calcolate al check-out.",
       "choose_options": "Scegli opzioni",
       "choose_product_options": "Scegli opzioni per {{ product_name }}",
