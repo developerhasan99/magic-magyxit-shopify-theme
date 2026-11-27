@@ -234,8 +234,8 @@
 {%- when 'selling_points' -%}
   {%- capture magyx_check_icon -%}
     <svg
-      width="12"
-      height="12"
+      width="20"
+      height="20"
       viewBox="0 0 22 22"
       aria-hidden="true"
       focusable="false"
@@ -254,21 +254,21 @@
   {%- endcapture -%}
 
   <ul
-    class="list-none flex flex-col gap-[3px] mt-2 mb-4 p-0"
+    class="list-none flex flex-col gap-2 mt-2 mb-4 p-0"
     {{ block.shopify_attributes }}
   >
-    <li class="flex items-center gap-[5px] m-0 p-0 text-black text-sm">
+    <li class="flex items-center gap-2 m-0 p-0 text-black text-base">
       {{ magyx_check_icon }}
       <span>{{ 'products.product.selling_point_1' | t }}</span>
     </li>
 
-    <li class="flex items-center gap-[5px] m-0 p-0 text-black text-sm">
+    <li class="flex items-center gap-2 m-0 p-0 text-black text-base">
       {{ magyx_check_icon }}
       <span>{{ 'products.product.selling_point_2' | t }}</span>
     </li>
 
     
-    <li class="flex items-center gap-[5px] m-0 p-0 text-black text-sm">
+    <li class="flex items-center gap-2 m-0 p-0 text-black text-base">
       {{ magyx_check_icon }}
       <span>{{ 'products.product.selling_point_3' | t }}</span>
     </li>
